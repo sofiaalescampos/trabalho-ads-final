@@ -1,79 +1,53 @@
-<head>
-  <h1>Projeto de Estatística</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goStats</title>
+    <link rel="shortcut icon" href="imagens/logo-aba-navegador.png"/>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-  <dt>Coleta de dados:</dt>
-  <input type="text" id="coleta_de_dados" size="55" placeholder="valores separados por espaços ou ';' ou ',' (leia o coment. no código)"> <!-- (aqui na verdade pdc separado por qlq coisa - depois vemos uma msg bancana para colocar)-->
-  Amostra<input type="radio" name="amostra_ou_populacao" name='nomeVariavel' value="Amostra">
-  População<input type="radio" name="amostra_ou_populacao" value="Populacao"><br><br>
-  <dt>Nome da variavel:</dt><input type="text" class="nomeVariavel" size="30"
-    placeholder="Insira o nome da var. (1ª coluna)"><br><br>
-  <dt>Tipo da variavel:</dt>
-  <input type="radio" name="nome_da_variavel" value="variavel_qualitativa_nominal">variavel qualitativa nominal <br>
-  <input type="radio" name="nome_da_variavel" value="variavel_qualitativa_ordinal">variavel qualitativa ordinal <br>
-  <input type="radio" name="nome_da_variavel" value="variavel_quantitativa_discreta">variavel quantitativa discreta
-  <br>
-  <input type="radio" name="nome_da_variavel" value="variavel_quantitativa_continua">variavel quantitativa continua
-  <br><br>
-  <input type="button" id='btnCalc' name="botao_calcular" value="Calcular">
-  <div class="tabelas"></div>
+    <!--MENU RESPONSIVO-->
+    <header>
+        <nav class="menu" id="menu">
+            <input type="checkbox" id="btn-menu">
+            <label for="btn-menu">&#9776;</label>
+            <img  id="logo"src="imagens/logo-menu.png"/>
 
-  <script>
-    // Rastreando o botao_calcular na DOM
-    const btnCalc = document.querySelector('#btnCalc')
+            <ul>
+                <li><a href="descritiva/descritiva.html">Estatística Descritiva</a></li>
+                <li><a href="probabilidade/probabilidade.html">Probabilidade</a></li>
+				<li><a href="correlacao/correlacao.html">Correlação e Regressão</a></li>
+				<li><a href="sobreNos/sobreNos.html">Sobre nós</a></li>
+            </ul>
+            
+            <div id=botaoLogin>
+                <a href="login/login.html">Login</a>
+            </div>
 
-    // Quando botao_calcular sofrer onclick a seguinte função vai disparar:
-    btnCalc.onclick = () => {
-      //Rastreando valores e nomeVariavel(coluna 1) inserida
-      const inputDados = document.querySelector('#coleta_de_dados').value
-      const nomeVariavel = document.querySelector('.nomeVariavel').value
+        </nav>
+    </header>
 
+        <!--CORPO DA PÁGINA INICIAL-->
+        <div class="container1">
+            <div class="container1-1">
+                <img id="logotipo-banner" src="imagens/logo.png"/>
+            </div>
+            
+            <div class="container1-2">
+                <span id="msg1">Com três análises precisas e objetivas, você consegue tomar a melhor decisão para fazer seu negócio decolar.</span>
+            </div>
+        </div>
 
-      // criando uma nova variável com o que foi analisado de freq. na função
-      let objFrequencia = geraFrequencia(inputDados)
-      let coluna1 = Object.keys(objFrequencia) // Object.keys pega o nome do atributo
-      let coluna2 = Object.values(objFrequencia) // Object.values pega o VALOR do atributo
+        <div class="container2">
+            <img id="fig1" src="imagens/fig1.png"/>
+        </div>
 
-      
-      // processo de geração da tabela : (achei melhor não usar a template string como havia falado)
-      var html = `<table border='1'>
-                  <tr>
-                    <th>${nomeVariavel}</th>
-                    <th>Frequência</th>
-                  </tr>`
-      // acima criamos as palavras de cabeçalho  
-
-
-      //abaixo geramos os itens da tabela
-      for (var i = 0; i < coluna1.length; i++) {
-        html += "<tr>"
-        html += "<td>" + coluna1[i] + "</td>"
-        html += "<td>" + coluna2[i] + "</td>"
-        html += "</tr>"
-      }
-      html += "</table>"
-
-      // aqui adicionamos o que rolou no for dentro de uma div de resultado
-      document.querySelector('.tabelas').innerHTML = html
-    }
-
-    // Função que separa as vírgulas e gera freq.; ela recebe como parametro os dados inseridos.
-    function geraFrequencia(dados_inseridos) {
-      var pattern = /\w+/g,
-        string = dados_inseridos,
-        matchedWords = string.match(pattern);
-      var counts = matchedWords.reduce(function (stats, word) {
-        if (stats.hasOwnProperty(word)) {
-          stats[word] = stats[word] + 1;
-        } else {
-          stats[word] = 1;
-        }
-        return stats;
-      }, {});
-      return counts
-    }
-
-  // código acima obtido em https://stackoverflow.com/questions/30906807/word-frequency-in-javascript
-  </script>
+<!--
+        
+    
+   
+-->
 </body>
+</html>
